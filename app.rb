@@ -16,6 +16,7 @@ post '/callback' do
   end
 
   receive_request = Line::Bot::Receive::Request.new(request.env)
+  p receive_request
 
   receive_request.data.each do |message|
     case message.content
