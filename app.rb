@@ -16,11 +16,11 @@ post '/callback' do
   end
 
   receive_request = Line::Bot::Receive::Request.new(request.env)
-  p receive_request
 
   receive_request.data.each do |message|
     case message.content
     when Line::Bot::Message::Text
+      p.message
       bot.send_text(
         to_mid: message.from_mid,
         text: message.content[:text] + 'じゃない',
