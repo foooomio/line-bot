@@ -18,12 +18,17 @@ post '/callback' do
   receive_request = Line::Bot::Receive::Request.new(request.env)
 
   receive_request.data.each do |message|
+    p message
     case message.content
     when Line::Bot::Message::Text
-      p message
       bot.send_text(
         to_mid: message.from_mid,
         text: message.content[:text] + 'じゃない',
+      )
+    when Line::Bot::Message::Location
+      bot.send_text(
+        to_mid: message.from_mid,
+        text: message.location.latitude + ', ' + message.location.longitude,
       )
     end
   end
