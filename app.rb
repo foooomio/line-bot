@@ -10,14 +10,6 @@ def bot
 end
 
 post '/callback' do
-  if ENV['FIXIE_URL']
-    proxy = URI(ENV['FIXIE_URL'])
-    bot.httpclient.proxy_address = proxy.host
-    bot.httpclient.proxy_port = proxy.port
-    bot.httpclient.proxy_user = proxy.user
-    bot.httpclient.proxy_pass = proxy.password
-  end
-
   signature = request.env['HTTP_X_LINE_CHANNELSIGNATURE']
   unless bot.validate_signature(request.body.read, signature)
     error 400 do 'BAD Request' end
