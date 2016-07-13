@@ -28,7 +28,7 @@ post '/callback' do
     when Line::Bot::Message::Location
       bot.send_text(
         to_mid: message.from_mid,
-        text: message[:latitude] + ', ' + message[:longitude],
+        text: message.content[:latitude] + ', ' + message.content[:longitude],
       )
     end
   end
